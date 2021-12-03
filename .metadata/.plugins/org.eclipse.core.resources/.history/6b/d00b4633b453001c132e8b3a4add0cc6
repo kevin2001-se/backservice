@@ -1,0 +1,76 @@
+package controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import entity.Tarea;
+import service.TareaService;
+import util.Constantes;
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
+public class TareaController {
+	
+	@Autowired
+	private TareaService tareaService;
+	
+	
+	@GetMapping("/listar")
+	@ResponseBody
+	public ResponseEntity<List<Tarea>> listaTarea(){
+		List<Tarea> lista = tareaService.listaTarea();
+		return ResponseEntity.ok(lista);
+	}
+	
+	@PostMapping("/registrar")
+	@ResponseBody
+	public  ResponseEntity<Map<String, Object>> registraTarea(@RequestBody Tarea obj){
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Tarea objSalida = tareaService.registrarTarea(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", Constantes.MENSAJE_REG_ERROR);
+			}else {
+				salida.put("mensaje", Constantes.MENSAJE_REG_EXITOSO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", Constantes.MENSAJE_REG_ERROR);
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@PutMapping("/actulizar")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualizarTarea(@RequestBody Tarea tarea){
+		Map<String, Object> salida = new HashMap<String, Object>();
+		
+		try {
+			if (tarea != null) {
+				Tarea obj = tareaService.actualizarTarea(tarea);
+				return ResponseEntity.ok(salida);
+			}else {
+				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+		}
+		return ResponseEntity.ok(salida);
+
+	}
+
+}

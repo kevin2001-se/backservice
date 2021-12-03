@@ -1,0 +1,28 @@
+package com.servicios.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.servicios.model.Usuario;
+import com.servicios.repository.UsuarioRespository;
+
+@Service
+public class UsuarioServiceImple implements UsuarioServices{
+
+	
+	@Autowired
+	private UsuarioRespository repo;
+	
+	@Override
+	public Usuario buscarUsuario(String correo, String contraseña) {
+		// TODO Auto-generated method stub
+		return repo.BuscarUsuario(correo,contraseña);
+	}
+
+	@Override
+	public Usuario registrarUsuario(Usuario a) {
+		// TODO Auto-generated method stub
+		return repo.save(a);
+	}
+	
+}
