@@ -1,0 +1,21 @@
+package com.servicios.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.servicios.model.Archivo;
+import com.servicios.repository.ArchivoRespository;
+
+public class ArchivoServiceImpl implements ArchivoService {
+
+	@Autowired
+	private ArchivoRespository repository;
+	
+	@Override
+	public List<Archivo> listarArchivosXUsuario(int idUsuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

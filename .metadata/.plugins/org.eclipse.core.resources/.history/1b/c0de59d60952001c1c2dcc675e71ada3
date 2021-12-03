@@ -1,0 +1,15 @@
+package com.servicios.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.servicios.model.Archivo;
+import com.servicios.model.Usuario;
+
+public interface ArchivoRespository extends JpaRepository<Archivo, Integer> {
+
+	@Query("Select a from Archivo a where a.usuario.codigoUsu = :correo and u.contraseña = :contraseña")
+	public Usuario BuscarUsuario(@Param("correo") String correo, @Param("contraseña") String contraseña);
+	
+}

@@ -1,0 +1,5 @@
+package com.servicios.commons;
+
+public class FileUploadExceptionAdvice {
+
+}

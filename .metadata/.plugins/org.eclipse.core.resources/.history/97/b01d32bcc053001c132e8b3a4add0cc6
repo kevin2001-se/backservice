@@ -1,0 +1,8 @@
+package com.servicios.services;
+
+import com.servicios.model.Usuario;
+
+public interface UsuarioServices {
+	public Usuario buscarUsuario(String correo, String contraseña);
+	public Usuario registrarUsuario(Usuario a);
+}
