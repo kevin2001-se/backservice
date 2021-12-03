@@ -1,0 +1,44 @@
+package service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import entity.Tarea;
+import repository.TareaRepository;
+
+@Service
+public class TareaServiceImpl implements TareaService{
+	
+	@Autowired
+	private TareaRepository repository;
+
+	@Override
+	public List<Tarea> listaTarea() {
+		return repository.findAll();
+	}
+
+	@Override
+	public Tarea registrarTarea(Tarea tareaR) {
+		return repository.save(tareaR);
+	}
+
+	@Override
+	public Tarea actualizarTarea(Tarea tareaA) {
+		return repository.save(tareaA);
+	}
+
+	@Override
+	public Optional<Tarea> busquedaTarea(int id) {
+		return repository.findById(id);
+	}
+
+	@Override
+	public void eliminarTarea(int id) {
+		repository.deleteById(id);
+		
+	}
+
+}

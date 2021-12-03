@@ -1,0 +1,55 @@
+package com.tarea.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Tarea")
+public class Tarea {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int codigoTarea;
+	private String nombre;
+    private int codigoTipoUsu;
+	private String descripcion;
+	private String fechaTarea;
+	
+	
+	public int getCodigoTarea() {
+		return codigoTarea;
+	}
+	public void setCodigoTarea(int codigoTarea) {
+		this.codigoTarea = codigoTarea;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public int getCodigoTipoUsu() {
+		return codigoTipoUsu;
+	}
+	public void setCodigoTipoUsu(int codigoTipoUsu) {
+		this.codigoTipoUsu = codigoTipoUsu;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public String getFechaTarea() {
+		return fechaTarea;
+	}
+	public void setFechaTarea(String fechaTarea) {
+		this.fechaTarea = fechaTarea;
+	}
+	
+	
+	
+}

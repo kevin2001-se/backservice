@@ -1,0 +1,11 @@
+package com.servicios.services;
+
+import java.util.List;
+
+import com.servicios.model.Archivo;
+
+public interface ArchivoService {
+
+	public abstract List<Archivo> listarArchivosXUsuario(int idUsuario);
+	
+}
