@@ -1,0 +1,16 @@
+package service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.tarea.entity.Tarea;
+
+
+public interface TareaService {
+	public abstract List<Tarea> listaTarea();
+	public abstract Tarea registrarTarea(Tarea tareaR);
+	public abstract Tarea actualizarTarea(Tarea tareaA);
+	public abstract Optional<Tarea> busquedaTarea(int id);
+	public abstract void eliminarTarea(int id);
+
+}

@@ -1,0 +1,49 @@
+package com.servicios.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.servicios.model.Archivo;
+import com.servicios.services.ArchivoService;
+
+@RestController
+@RequestMapping("/api/archivo")
+public class ArchivoController {
+
+	@Autowired
+	private ArchivoService service;
+	
+	@GetMapping
+	@ResponseBody
+	public ResponseEntity<List<Archivo>> listarArchivoXUsuario(@RequestParam(value = "id", required = false, defaultValue = "") int id){
+		List<Archivo> lista = service.listarArchivosXUsuario(id);
+		return ResponseEntity.ok(lista);
+	}
+	
+	@PostMapping
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> registrarArchivo(@RequestBody Archivo archivo){
+		
+		Map<String, Object> salida = new HashMap<String, Object>();
+		
+		try {
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+}

@@ -1,0 +1,19 @@
+package com.servicios.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.servicios.model.Tarea;
+
+
+@Repository
+public interface TareaRepository extends JpaRepository<Tarea, Integer>{
+
+	@Query("Select u from Tarea u where u.usuario.codigoUsu = :codigo")
+	public List<Tarea> ListarTareaXUsuario( @Param("codigo") int id);
+	
+}

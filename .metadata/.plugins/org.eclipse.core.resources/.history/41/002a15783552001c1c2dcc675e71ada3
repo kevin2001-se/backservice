@@ -1,0 +1,23 @@
+package com.servicios.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.servicios.model.Archivo;
+import com.servicios.repository.ArchivoRespository;
+
+@Service
+public class ArchivoServiceImpl implements ArchivoService {
+
+	@Autowired
+	private ArchivoRespository repository;
+	
+	@Override
+	public List<Archivo> listarArchivosXUsuario(int idUsuario) {
+		// TODO Auto-generated method stub
+		return repository.ListarArchivoXUsuario(idUsuario);
+	}
+
+}
