@@ -1,0 +1,70 @@
+package com.servicios.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tarea.entity.Tarea;
+import com.tarea.service.TareaService;
+
+@RestController
+@RequestMapping("/api/tarea")
+@CrossOrigin(origins = "http://localhost:4200")
+public class TareaController {
+
+	@Autowired
+	private TareaService tareaService;
+	
+	
+	@GetMapping("/listar")
+	@ResponseBody
+	public ResponseEntity<List<Tarea>> listaTarea(){
+		List<Tarea> lista = tareaService.listaTarea();
+		return ResponseEntity.ok(lista);
+	}
+	
+	@PostMapping("/registrar")
+	@ResponseBody
+	public  ResponseEntity<Tarea> registraTarea(@RequestBody Tarea obj){
+
+		Tarea objSalida = tareaService.registrarTarea(obj);
+			
+		return ResponseEntity.ok(objSalida);
+	}
+	
+	@PutMapping("/actulizar")
+	@ResponseBody
+	public ResponseEntity<Tarea> actualizarTarea(@RequestBody Tarea tarea){
+		
+		Tarea obj = tareaService.actualizarTarea(tarea);
+		return ResponseEntity.ok(obj);
+
+	}
+	
+	@GetMapping("/listarbusqueda/{id}")
+	@ResponseBody
+	public ResponseEntity<Optional<Tarea>> busquedaTarea(@PathVariable int id){
+		Optional<Tarea> obj = tareaService.busquedaTarea(id);
+		return ResponseEntity.ok(obj);
+	}
+	
+	@DeleteMapping("/eliminar/{id}")
+	@ResponseBody
+	public void EliminarTarea(@PathVariable int id){
+		
+		tareaService.eliminarTarea(id);
+	}
+	
+}

@@ -1,0 +1,17 @@
+package com.servicios.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.servicios.model.Archivo;
+import com.servicios.model.Usuario;
+
+public interface ArchivoRespository extends JpaRepository<Archivo, Integer> {
+
+	@Query("Select a from Archivo a where a.usuario.codigoUsu = :id")
+	public List<Archivo> ListarArchivoXUsuario(@Param("id") int idUsuario);
+	
+}

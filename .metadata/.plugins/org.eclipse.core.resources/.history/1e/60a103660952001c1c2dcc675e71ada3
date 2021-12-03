@@ -1,0 +1,5 @@
+package com.servicios.repository;
+
+public interface ArchivoRespository {
+
+}

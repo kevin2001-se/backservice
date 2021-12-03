@@ -1,0 +1,63 @@
+drop database ConsultaBien;
+go
+
+use ConsultaBien
+
+/*TABLA TIPO DE USUARIO*/
+create table tipo_usuario(
+id_tipo_usuario int IDENTITY(1,1),
+des_tipo_usuario varchar(50) not null,
+PRIMARY KEY(id_tipo_usuario)
+);
+go
+
+/*TABLA DE CLIENTE*/
+create table Cliente(
+id_cliente int IDENTITY(1,1) not null,
+nom_cliente varchar(max) not null,
+ape_cliente varchar(max) not null,
+contraseña_cliente varchar(200) not null,
+correo_cliente varchar(max) not null,
+dni char(8) null,
+token varchar(200) null,
+fecha_cliente datetime not null default CURRENT_TIMESTAMP,
+id_tipo_usuario int ,
+PRIMARY KEY (id_cliente),
+FOREIGN KEY (id_tipo_usuario) REFERENCES tipo_usuario(id_tipo_usuario)
+);
+
+
+insert into tipo_usuario(des_tipo_usuario) values('Cliente');
+
+create procedure LoginUsuario
+(
+@correo varchar(max),
+@pass varchar(max)
+)
+as
+begin
+	SELECT * FROM Cliente WHERE correo_cliente = @correo and contraseña_cliente = @pass
+end
+go
+
+Insert into Cliente(nom_cliente,ape_cliente,contraseña_cliente,correo_cliente,id_tipo_usuario)values('Luis','Estrada','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','luis@gmail.com',1);
+/*
+
+correo : luis@gmail.com
+pass: 123
+
+*/
+
+select * from Cliente
+
+create procedure sp_RegistrarCliente(
+@nombre varchar(max),
+@ape_cliente varchar(max),
+@pass varchar(max),
+@correo varchar(max)
+)
+as
+begin
+	Insert into Cliente(nom_cliente,ape_cliente,contraseña_cliente,correo_cliente,id_tipo_usuario)values(@nombre,@ape_cliente,@pass,@correo,1);
+end
+go

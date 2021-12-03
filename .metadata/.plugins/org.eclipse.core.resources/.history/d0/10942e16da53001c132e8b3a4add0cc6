@@ -1,0 +1,64 @@
+package com.servicios.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.servicios.model.Usuario;
+import com.servicios.services.UsuarioServices;
+
+@RestController
+@RequestMapping("/api/authUsuario")
+@CrossOrigin(origins = "http://localhost:4200")
+public class LoginController {
+
+	@Autowired
+	private UsuarioServices service;
+	
+	@PostMapping("/logeo")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> login(
+			@RequestParam(value = "correo", required = false, defaultValue = "") String correo, 			@RequestParam(value = "contrasena", required = false, defaultValue = "") String contraseña) {
+		Map<String, Object> salida = new HashMap<String, Object>();
+		Usuario obj = service.buscarUsuario(correo, contraseña);
+		if (obj == null) {
+			salida.put("mensaje", "Usuario y/o Contraseña Incorrecta");
+		}else {
+			salida.put("mensaje", "Logueado");
+		}
+		
+		return ResponseEntity.ok(salida);
+	}
+	
+	@PostMapping
+	@ResponseBody
+	public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario){
+		if (usuario != null) {
+			Usuario obj = service.registrarUsuario(usuario);
+			return ResponseEntity.ok(obj);
+		}else {
+			return ResponseEntity.noContent().build();
+		}
+	}
+	
+	@GetMapping("/session/{id}")
+	@ResponseBody
+	public ResponseEntity<Usuario> agregarUsuario(@PathVariable int id){
+		Usuario obj = service.findUsuario(id);
+		return ResponseEntity.ok(obj);
+		
+	}
+	
+}
